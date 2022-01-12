@@ -57,6 +57,7 @@ class ItemsViewController: UITableViewController {
                 itemStore.removeItem(item)
 
                 // Also remove that row from the table view with an animation
+                // Update
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
         }
