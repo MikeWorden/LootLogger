@@ -17,6 +17,7 @@
 		0F03592E278E45BF00245263 /* LootLoggerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03592D278E45BF00245263 /* LootLoggerUITestsLaunchTests.swift */; };
 		0F03593B278E4D8000245263 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03593A278E4D8000245263 /* ItemsViewController.swift */; };
 		0F03593D278E4FE100245263 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03593C278E4FE100245263 /* Item.swift */; };
+		0F03593F278E51D100245263 /* ItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03593E278E51D100245263 /* ItemStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		0F03592D278E45BF00245263 /* LootLoggerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LootLoggerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0F03593A278E4D8000245263 /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		0F03593C278E4FE100245263 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		0F03593E278E51D100245263 /* ItemStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				0F03590A278E45BF00245263 /* AppDelegate.swift */,
 				0F03593C278E4FE100245263 /* Item.swift */,
+				0F03593E278E51D100245263 /* ItemStore.swift */,
 				0F03590C278E45BF00245263 /* SceneDelegate.swift */,
 				0F03593A278E4D8000245263 /* ItemsViewController.swift */,
 				0F035910278E45BF00245263 /* Main.storyboard */,
@@ -264,6 +267,7 @@
 				0F03593D278E4FE100245263 /* Item.swift in Sources */,
 				0F03593B278E4D8000245263 /* ItemsViewController.swift in Sources */,
 				0F03590B278E45BF00245263 /* AppDelegate.swift in Sources */,
+				0F03593F278E51D100245263 /* ItemStore.swift in Sources */,
 				0F03590D278E45BF00245263 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
