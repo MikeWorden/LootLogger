@@ -16,14 +16,20 @@ class ItemsViewController: UITableViewController {
         // Create a new item and add it to the store
         let newItem = itemStore.createItem()
 
-            // Figure out where that item is in the array
-            if let index = itemStore.allItems.firstIndex(of: newItem) {
-                let indexPath = IndexPath(row: index, section: 0)
+        // Figure out where that item is in the array
+        if newItem.sectionID == 0 {
+            if let index = itemStore.highdollarItems.firstIndex(of: newItem) {
+                let indexPath = IndexPath(row: index, section: newItem.sectionID)
 
                 // Insert this new row into the table
                 tableView.insertRows(at: [indexPath], with: .automatic)
             }
-
+        } else {
+            if let index = itemStore.lowdollarItems.firstIndex(of: newItem) {
+                let indexPath = IndexPath(row: index, section: newItem.sectionID)
+                tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+        }
        
     }
 
@@ -73,11 +79,25 @@ class ItemsViewController: UITableViewController {
     
     
     
-    override func tableView(_ tableView: UITableView,
+    /*override func tableView(_ tableView: UITableView,
             numberOfRowsInSection section: Int) -> Int {
         return itemStore.allItems.count
+    }*/
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // count of which array has the section books
+            var num: Int = 0
+            if (section == 0) {
+                num = itemStore.highdollarItems.count
+            } else  {
+                num = itemStore.lowdollarItems.count
+            }
+            return num
+    }
     
     override func tableView(_ tableView: UITableView,
             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,6 +117,9 @@ class ItemsViewController: UITableViewController {
         return cell
     }
 
-    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let section = itemStore.sectionTitles[section]
+        return section
+    }
     
 }

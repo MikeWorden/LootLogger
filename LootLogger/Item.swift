@@ -12,12 +12,18 @@ class Item : Equatable {
     var valueInDollars: Int
     var serialNumber: String?
     let dateCreated: Date
+    var sectionID: Int
     
     init(name: String, serialNumber: String?, valueInDollars: Int) {
             self.name = name
             self.valueInDollars = valueInDollars
             self.serialNumber = serialNumber
             self.dateCreated = Date()
+            if (self.valueInDollars >= 75) {
+                self.sectionID = 0
+            } else {
+                self.sectionID = 1
+            }
         }
 
     convenience init(random: Bool = false) {

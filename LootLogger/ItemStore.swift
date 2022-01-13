@@ -10,16 +10,24 @@ import UIKit
 class ItemStore  {
 
     var allItems = [Item]()
+    var highdollarItems = [Item]()
+    var lowdollarItems = [Item]()
+    var sectionTitles = [String]()
+    
     @discardableResult func createItem() -> Item {
         let newItem = Item(random: true)
         allItems.append(newItem)
+        if (newItem.valueInDollars >= 75) {
+            highdollarItems.append(newItem)
+        } else {
+            lowdollarItems.append(newItem)
+        }
         return newItem
     }
-/*    init() {
-        for _ in 0..<25 {
-            createItem()
-        }
-    }*/
+    init() {
+      sectionTitles = ["High Dollar Items", "Low Dollar Items"]
+        
+    }
     
     func removeItem(_ item: Item) {
         if let index = allItems.firstIndex(of: item) {
