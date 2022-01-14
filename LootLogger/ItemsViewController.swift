@@ -97,6 +97,13 @@ class ItemsViewController: UITableViewController {
         return cell
     }
 
-    
-    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        var sectionHeader = ""
+        if (itemStore.allItems.count == 0 ) {
+            sectionHeader = "No Items Found!"
+        } else {
+            sectionHeader = ""
+        }
+        return sectionHeader
+    }
 }
