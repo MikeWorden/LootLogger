@@ -11,6 +11,15 @@ class ItemsViewController: UITableViewController {
     
     var itemStore: ItemStore!
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+       // tableView.rowHeight = 65
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 65
+    }
+    
     @IBAction func addNewItem(_ sender: UIButton) {
         // Make a new index path for the 0th section, last row
         // Create a new item and add it to the store
@@ -83,16 +92,26 @@ class ItemsViewController: UITableViewController {
             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Create an instance of UITableViewCell with default appearance
         //let cell = UITableViewCell(style: .value1, reuseIdentifier: "UITableViewCell")
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell",
-                for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell",
+                                                     for: indexPath) as! ItemCell
+
+        
 
         // Set the text on the cell with the description of the item
         // that is at the nth index of items, where n = row this cell
         // will appear in on the table view
         let item = itemStore.allItems[indexPath.row]
 
-        cell.textLabel?.text = item.name
-        cell.detailTextLabel?.text = "$\(item.valueInDollars)"
+        // Configure the cell with the Item
+        cell.nameLabel.text = item.name
+        cell.serialNumberLabel.text = item.serialNumber
+        cell.valueLabel.text = "$\(item.valueInDollars)"
+        if item.valueInDollars < 50 {
+            cell.valueLabel.textColor = UIColor.green
+        } else {
+            cell.valueLabel.textColor = UIColor.red
+        }
+
 
         return cell
     }
