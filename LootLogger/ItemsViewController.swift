@@ -11,7 +11,16 @@ class ItemsViewController: UITableViewController {
     
     var itemStore: ItemStore!
     
-    @IBAction func addNewItem(_ sender: UIButton) {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+       // tableView.rowHeight = 65
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 65
+    }
+    
+    @IBAction func addNewItem(_ sender: UIBarButtonItem) {
         // Make a new index path for the 0th section, last row
         // Create a new item and add it to the store
         let newItem = itemStore.createItem()
@@ -29,23 +38,7 @@ class ItemsViewController: UITableViewController {
 
     
 
-    @IBAction func toggleEditingMode(_ sender: UIButton) {
-        // If you are currently in editing mode...
-            if isEditing {
-                // Change text of button to inform user of state
-                sender.setTitle("Edit", for: .normal)
-
-                // Turn off editing mode
-                setEditing(false, animated: true)
-            } else {
-                // Change text of button to inform user of state
-                sender.setTitle("Done", for: .normal)
-
-                setEditing(true, animated: true)
-            }
-
-    }
-
+    
     override func tableView(_ tableView: UITableView,
                             commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
@@ -83,18 +76,58 @@ class ItemsViewController: UITableViewController {
             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Create an instance of UITableViewCell with default appearance
         //let cell = UITableViewCell(style: .value1, reuseIdentifier: "UITableViewCell")
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell",
-                for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell",
+                                                     for: indexPath) as! ItemCell
+
+        
 
         // Set the text on the cell with the description of the item
         // that is at the nth index of items, where n = row this cell
         // will appear in on the table view
         let item = itemStore.allItems[indexPath.row]
 
-        cell.textLabel?.text = item.name
-        cell.detailTextLabel?.text = "$\(item.valueInDollars)"
+        // Configure the cell with the Item
+        cell.nameLabel.text = item.name
+        cell.serialNumberLabel.text = item.serialNumber
+        cell.valueLabel.text = "$\(item.valueInDollars)"
+        if item.valueInDollars < 50 {
+            cell.valueLabel.textColor = UIColor.green
+        } else {
+            cell.valueLabel.textColor = UIColor.red
+        }
+
 
         return cell
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // If the triggered segue is the "showItem" segue
+        switch segue.identifier {
+        case "showItem":
+            // Figure out which row was just tapped
+            if let row = tableView.indexPathForSelectedRow?.row {
+
+                // Get the item associated with this row and pass it along
+                let item = itemStore.allItems[row]
+                let detailViewController
+                        = segue.destination as! DetailViewController
+                detailViewController.item = item
+            }
+        default:
+            preconditionFailure("Unexpected segue identifier.")
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        tableView.reloadData()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+
+        navigationItem.leftBarButtonItem = editButtonItem
     }
 
     
