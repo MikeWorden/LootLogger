@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Items View Controller-->
+        <!--LootLogger-->
         <scene sceneID="NJv-NA-fPl">
             <objects>
                 <tableViewController id="VBA-vn-Kcg" customClass="ItemsViewController" customModule="LootLogger" sceneMemberID="viewController">
@@ -16,48 +16,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="U7B-uX-GuG">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wDR-pZ-wWB">
-                                    <rect key="frame" x="8" y="12" width="195" height="30"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="30" id="Agh-7U-n8k"/>
-                                        <constraint firstAttribute="height" constant="30" id="b7C-au-1JZ"/>
-                                    </constraints>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="Edit"/>
-                                    <connections>
-                                        <action selector="toggleEditingMode:" destination="VBA-vn-Kcg" eventType="touchUpInside" id="VBS-mr-KEU"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QI9-tI-FwE">
-                                    <rect key="frame" x="211" y="12" width="195" height="30"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="30" id="ezf-GP-Vdk"/>
-                                        <constraint firstAttribute="height" constant="30" id="ykg-3b-z67"/>
-                                    </constraints>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="Add"/>
-                                    <connections>
-                                        <action selector="addNewItem:" destination="VBA-vn-Kcg" eventType="touchUpInside" id="gSa-Pl-VF4"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <constraints>
-                                <constraint firstItem="wDR-pZ-wWB" firstAttribute="centerY" secondItem="U7B-uX-GuG" secondAttribute="centerY" id="1MO-2E-TSv"/>
-                                <constraint firstItem="QI9-tI-FwE" firstAttribute="centerY" secondItem="U7B-uX-GuG" secondAttribute="centerY" id="BPR-rT-4hq"/>
-                                <constraint firstItem="wDR-pZ-wWB" firstAttribute="leading" secondItem="U7B-uX-GuG" secondAttribute="leading" constant="8" id="BaL-gc-nqt"/>
-                                <constraint firstItem="QI9-tI-FwE" firstAttribute="width" secondItem="wDR-pZ-wWB" secondAttribute="width" id="OYA-rN-kZg"/>
-                                <constraint firstAttribute="trailing" secondItem="QI9-tI-FwE" secondAttribute="trailing" constant="8" id="XYk-wv-jmZ"/>
-                                <constraint firstItem="QI9-tI-FwE" firstAttribute="leading" secondItem="wDR-pZ-wWB" secondAttribute="trailing" constant="8" id="qEq-cf-a1h"/>
-                            </constraints>
-                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ItemCell" rowHeight="65" id="5wM-N2-fwr" customClass="ItemCell" customModule="LootLogger" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98.5" width="414" height="65"/>
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5wM-N2-fwr" id="F3W-O5-LFd">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
@@ -108,7 +69,13 @@
                             <outlet property="delegate" destination="VBA-vn-Kcg" id="bVJ-ap-N8c"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="mHs-wF-bb6"/>
+                    <navigationItem key="navigationItem" title="LootLogger" id="Rrr-xO-Pdi">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="tU4-Fd-eUz">
+                            <connections>
+                                <action selector="addNewItem:" destination="VBA-vn-Kcg" id="U0R-8C-mmf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h9T-V4-IJQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
