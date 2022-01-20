@@ -23,7 +23,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     var item: Item! {
         didSet {
-            navigationItem.title = item.name
+            //navigationItem.title = item.name
+           
         }
     }
 

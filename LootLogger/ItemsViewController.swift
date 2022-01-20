@@ -112,6 +112,10 @@ class ItemsViewController: UITableViewController {
                 let detailViewController
                         = segue.destination as! DetailViewController
                 detailViewController.item = item
+                let backItem = UIBarButtonItem()
+                backItem.title = "Back"
+                navigationItem.backBarButtonItem = backItem
+                
             }
         default:
             preconditionFailure("Unexpected segue identifier.")
@@ -126,6 +130,7 @@ class ItemsViewController: UITableViewController {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
 
         navigationItem.leftBarButtonItem = editButtonItem
     }
