@@ -45,20 +45,19 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
 
     
 
-        override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
 
-            nameField.text = item.name
-            serialNumberField.text = item.serialNumber
-            //valueField.text = "\(item.valueInDollars)"
-            //dateLabel.text = "\(item.dateCreated)"
-            valueField.text =
-                    numberFormatter.string(from: NSNumber(value:item.valueInDollars))
-            dateLabel.text = dateFormatter.string(from: item.dateCreated)
+        nameField.text = item.name
+        serialNumberField.text = item.serialNumber
+        //valueField.text = "\(item.valueInDollars)"
+        //dateLabel.text = "\(item.dateCreated)"
+        valueField.text =
+                numberFormatter.string(from: NSNumber(value:item.valueInDollars))
+        dateLabel.text = dateFormatter.string(from: item.dateCreated)
 
-            
-            
-        }
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
@@ -84,7 +83,30 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         return true
     }
    
-   
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // If the triggered segue is the "showItem" segue
+        switch segue.identifier {
+        case "changeDate":
+            // Figure out which row was just tapped
+            /*if let row = tableView.indexPathForSelectedRow?.row {
+
+                // Get the item associated with this row and pass it along
+                let item = itemStore.allItems[row]
+                let detailViewController
+                        = segue.destination as! DetailViewController
+                detailViewController.item = item*/
+                
+                let dateViewController = segue.destination as! DateViewController
+                dateViewController.item = item
+                let backItem = UIBarButtonItem()
+                backItem.title = "Update Date"
+                navigationItem.backBarButtonItem = backItem
+                
+            
+        default:
+            preconditionFailure("Unexpected segue identifier.")
+        }
+    }
 
     
     
