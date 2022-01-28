@@ -7,12 +7,31 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UITextFieldDelegate {
+class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
   
+    @IBOutlet var nameField: UITextField!
+    @IBOutlet var serialNumberField: UITextField!
+    @IBOutlet var valueField: UITextField!
+    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var imageView: UIImageView!
+    
     
     @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
+    
+    func imagePicker(for sourceType: UIImagePickerController.SourceType)
+                                                            -> UIImagePickerController {
+        let imagePicker = UIImagePickerController()
+																
+        imagePicker.sourceType = sourceType
+        imagePicker.delegate = self
+                                                                
+                                                                
+        return imagePicker
+    }
+
+    
     
     @IBAction func choosePhotoSource(_ sender: UIBarButtonItem) {
         
@@ -23,16 +42,24 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         alertController.modalPresentationStyle = .popover
             alertController.popoverPresentationController?.barButtonItem = sender
 
-        
-        let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
-                print("Present camera")
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
+                   // print("Present camera")
+                let imagePicker = self.imagePicker(for: .camera)
+				self.present(imagePicker, animated: true, completion: nil)
+				                
             }
             alertController.addAction(cameraAction)
+        }
+        
+            
 
         let photoLibraryAction
                     = UIAlertAction(title: "Photo Library", style: .default) { _ in
-                print("Present photo library")
-            }
+                //print("Present photo library")
+			let imagePicker = self.imagePicker(for: .photoLibrary)
+			self.present(imagePicker, animated: true, completion: nil)
+        }
             alertController.addAction(photoLibraryAction)
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -42,10 +69,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    @IBOutlet var nameField: UITextField!
-    @IBOutlet var serialNumberField: UITextField!
-    @IBOutlet var valueField: UITextField!
-    @IBOutlet var dateLabel: UILabel!
+
     
     
     var item: Item! {
