@@ -14,6 +14,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
     @IBOutlet var valueField: UITextField!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
+	var imageStore: ImageStore!
+
+	
     
     
     @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
@@ -31,8 +34,24 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
         return imagePicker
     }
 
-    
-    
+	func imagePickerController(_ picker: UIImagePickerController,
+			didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+
+		// Get picked image from info dictionary
+		let image = info[.originalImage] as! UIImage
+		
+		// Store the image in the ImageStore for the item's key
+		imageStore.setImage(image, forKey: item.itemKey)
+
+
+		// Put that image on the screen in the image view
+		imageView.image = image
+
+		// Take image picker off the screen - you must call this dismiss method
+		dismiss(animated: true, completion: nil)
+
+	}
+			
     @IBAction func choosePhotoSource(_ sender: UIBarButtonItem) {
         
         let alertController = UIAlertController(title: nil,

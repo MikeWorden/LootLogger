@@ -10,6 +10,8 @@ import UIKit
 class ItemsViewController: UITableViewController {
     
     var itemStore: ItemStore!
+	var imageStore: ImageStore!
+
     
     
     override func viewDidLoad() {
@@ -48,6 +50,9 @@ class ItemsViewController: UITableViewController {
 
                 // Remove the item from the store
                 itemStore.removeItem(item)
+				
+				// And delete the image for the item
+				imageStore.deleteImage(forKey: item.itemKey)
 
                 // Also remove that row from the table view with an animation
                
@@ -112,6 +117,7 @@ class ItemsViewController: UITableViewController {
                 let detailViewController
                         = segue.destination as! DetailViewController
                 detailViewController.item = item
+				detailViewController.imageStore = imageStore
                 let backItem = UIBarButtonItem()
                 backItem.title = "Back"
                 navigationItem.backBarButtonItem = backItem
