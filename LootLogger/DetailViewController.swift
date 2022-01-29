@@ -29,6 +29,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
 																
         imagePicker.sourceType = sourceType
         imagePicker.delegate = self
+		imagePicker.allowsEditing = true
                                                                 
                                                                 
         return imagePicker
@@ -36,9 +37,13 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
 
 	func imagePickerController(_ picker: UIImagePickerController,
 			didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-
-		// Get picked image from info dictionary
-		let image = info[.originalImage] as! UIImage
+		
+		//var image:  UIImage
+		
+		guard  let image = info[.editedImage] as? UIImage else {
+			return
+		}
+		
 		
 		// Store the image in the ImageStore for the item's key
 		imageStore.setImage(image, forKey: item.itemKey)
@@ -65,6 +70,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
             let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
                    // print("Present camera")
                 let imagePicker = self.imagePicker(for: .camera)
+				imagePicker.allowsEditing = true
 				self.present(imagePicker, animated: true, completion: nil)
 				                
             }
@@ -79,8 +85,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
 			let imagePicker = self.imagePicker(for: .photoLibrary)
 			self.present(imagePicker, animated: true, completion: nil)
         }
-            alertController.addAction(photoLibraryAction)
+		alertController.addAction(photoLibraryAction)
 
+		
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
@@ -115,21 +122,31 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
 
     
 
-        override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
+	override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
-            nameField.text = item.name
-            serialNumberField.text = item.serialNumber
-            //valueField.text = "\(item.valueInDollars)"
-            //dateLabel.text = "\(item.dateCreated)"
-            valueField.text =
-                    numberFormatter.string(from: NSNumber(value:item.valueInDollars))
-            dateLabel.text = dateFormatter.string(from: item.dateCreated)
+        nameField.text = item.name
+        serialNumberField.text = item.serialNumber
+        //valueField.text = "\(item.valueInDollars)"
+        //dateLabel.text = "\(item.dateCreated)"
+        valueField.text =
+                numberFormatter.string(from: NSNumber(value:item.valueInDollars))
+        dateLabel.text = dateFormatter.string(from: item.dateCreated)
+		// Get the item key
+		let key = item.itemKey
+		
+		// if there is an associated image, retrieve & display it
+		let imageToDisplay = imageStore.image(forKey: key)
+		imageView.image = imageToDisplay
 
             
             
-        }
-    override func viewWillDisappear(_ animated: Bool) {
+	}
+    
+	
+	
+	
+	override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         // "Save" changes to item
