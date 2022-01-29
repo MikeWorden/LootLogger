@@ -177,6 +177,12 @@
                                             <action selector="choosePhotoSource:" destination="ESN-Rd-48F" id="ECp-O2-58p"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="OEY-aw-qdv"/>
+                                    <barButtonItem systemItem="trash" id="HBW-b5-SXo">
+                                        <connections>
+                                            <action selector="deletePhoto:" destination="ESN-Rd-48F" id="bdw-Pz-OOs"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>

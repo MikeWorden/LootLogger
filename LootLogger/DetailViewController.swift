@@ -18,7 +18,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
 
 	
     
-    
+	@IBAction func deletePhoto(_ sender: Any) {
+		//remove the image from the imageView
+		imageView.image = nil
+		// And delete the image for the item
+		imageStore.deleteImage(forKey: item.itemKey)
+		
+	}
+	
     @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
@@ -38,7 +45,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
 	func imagePickerController(_ picker: UIImagePickerController,
 			didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 		
-		//var image:  UIImage
+		
 		
 		guard  let image = info[.editedImage] as? UIImage else {
 			return
