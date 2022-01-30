@@ -9,16 +9,41 @@ import UIKit
 
 class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
   
-	// Mark -- IBOutlets
+	// MARK: -
+	// MARK:  IBOutlets
     @IBOutlet var nameField: UITextField!
     @IBOutlet var serialNumberField: UITextField!
     @IBOutlet var valueField: UITextField!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
-	var imageStore: ImageStore!
-
 	
-    // Mark -- IBActions
+	// MARK: -
+	// MARK:  Variables
+	var imageStore: ImageStore!
+	var item: Item! {
+		didSet {
+			//navigationItem.title = item.name
+			
+		}
+	}
+	
+	let numberFormatter: NumberFormatter = {
+		let formatter = NumberFormatter()
+		formatter.numberStyle = .decimal
+		formatter.minimumFractionDigits = 2
+		formatter.maximumFractionDigits = 2
+		return formatter
+	}()
+	
+	let dateFormatter: DateFormatter = {
+		let formatter = DateFormatter()
+		formatter.dateStyle = .medium
+		formatter.timeStyle = .none
+		return formatter
+	}()
+
+	// MARK: -
+    // MARK: IBActions
 	@IBAction func deletePhoto(_ sender: Any) {
 		//remove the image from the imageView
 		imageView.image = nil
@@ -31,8 +56,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
         view.endEditing(true)
     }
     
-	
-	//Mark -- Functions
+	// MARK: -
+	//MARK: Functions
 	@IBAction func choosePhotoSource(_ sender: UIBarButtonItem) {
 
 		let alertController = UIAlertController(title: nil,
@@ -74,27 +99,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UINavigationC
 
 
 
-	var item: Item! {
-		didSet {
-			//navigationItem.title = item.name
-			
-		}
-	}
 	
-	let numberFormatter: NumberFormatter = {
-		let formatter = NumberFormatter()
-		formatter.numberStyle = .decimal
-		formatter.minimumFractionDigits = 2
-		formatter.maximumFractionDigits = 2
-		return formatter
-	}()
-	
-	let dateFormatter: DateFormatter = {
-		let formatter = DateFormatter()
-		formatter.dateStyle = .medium
-		formatter.timeStyle = .none
-		return formatter
-	}()
 
 
 
